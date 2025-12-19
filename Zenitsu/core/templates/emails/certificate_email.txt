@@ -1,0 +1,19 @@
+Congratulations {{ recipient_name }}!
+
+Your {{ certificate_name }} is ready!
+
+{% if course_name %}You have successfully completed {{ course_name }}.{% endif %}
+
+Certificate Details:
+- Certificate Number: {{ certificate_number }}
+- Completion Date: {{ completion_date|date:"F d, Y" }}
+- Recipient: {{ recipient_name }}
+
+Your official certificate is attached to this email.
+
+Best regards,
+The Zenitsu Team
+
+---
+© 2025 Zenitsu. All rights reserved.
+This is an automated email. Please do not reply to this message.

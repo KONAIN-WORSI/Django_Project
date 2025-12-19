@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Log in</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Minimal page-scoped styles to match typical sign-up layout */
+        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f6f8fa; margin:0; }
+        .auth-wrap { max-width:420px; margin:6vh auto; background:#fff; padding:28px; border-radius:8px; box-shadow:0 6px 18px rgba(22,27,34,0.08); }
+        .brand { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+        .brand img { height:36px; }
+        h1 { font-size:20px; margin:0 0 8px; }
+        p.lead { margin:0 0 18px; color:#6b7280; }
+        .field { margin-bottom:12px; }
+        label { display:block; font-size:13px; margin-bottom:6px; color:#111827; }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width:100%; padding:10px 12px; border:1px solid #e6e9ee; border-radius:6px; font-size:14px;
+        }
+        .actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; }
+        .btn { background:#2563eb; color:#fff; padding:10px 14px; border-radius:6px; border:0; cursor:pointer; font-weight:600; width:100%; }
+        .secondary { background:transparent; color:#2563eb; border:1px solid transparent; text-decoration:none; font-size:14px; }
+        .muted { color:#6b7280; font-size:13px; }
+        .errors { background:#fff5f5; color:#b91c1c; padding:10px; border-radius:6px; margin-bottom:12px; font-size:13px; }
+        .helper { margin-top:12px; font-size:13px; color:#6b7280; text-align:center; }
+        .row { display:flex; gap:8px; align-items:center; }
+        .checkbox { display:flex; gap:8px; align-items:center; }
+        a.link { color:#2563eb; text-decoration:none; }
+    </style>
+</head>
+<body>
+    <main class="auth-wrap" role="main">
+        <div class="brand">
+            <img src="https://via.placeholder.com/120x36.png?text=Logo" alt="Logo" style="height:36px;">
+            <div>
+                <h1>Welcome back</h1>
+                <p class="lead">Sign in to your account</p>
+            </div>
+        </div>
+
+        <!-- Display error from view -->
+        {% if error %}
+            <div class="errors">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="id_email">Email address</label>
+                <input id="id_email" name="email" type="email" autocomplete="email" required
+                       value="{{ request.POST.email|default:'' }}" placeholder="you@company.com">
+            </div>
+
+            <div class="field">
+                <label for="id_password">Password</label>
+                <input id="id_password" name="password" type="password" autocomplete="current-password" required>
+            </div>
+
+            <div class="row" style="justify-content:space-between; margin-top:6px;">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember" id="id_remember" {% if request.POST.remember %}checked{% endif %}>
+                    <span class="muted">Remember me</span>
+                </label>
+                <div><a class="link" href="#">Forgot password?</a></div>
+            </div>
+
+            <div style="margin-top:14px;">
+                <button type="submit" class="btn">Sign in</button>
+            </div>
+
+            <p class="helper">Don't have an account? <a class="link" href="{% url 'signup' %}">Create account</a></p>
+
+            <p class="helper">By signing in you agree to our <a class="link" href="#">Terms</a> and <a class="link" href="#">Privacy Policy</a>.</p>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #6C5CE7, #00C2FF);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .content h2 {
+            color: #6C5CE7;
+            margin-top: 0;
+        }
+        .certificate-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .certificate-info p {
+            margin: 10px 0;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #6C5CE7, #00C2FF);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🎉 Congratulations!</h1>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {{ recipient_name }},</h2>
+            
+            <p>We are thrilled to inform you that your <strong>{{ certificate_name }}</strong> is ready!</p>
+            
+            {% if course_name %}
+                <p>You have successfully completed <strong>{{ course_name }}</strong> and demonstrated exceptional dedication and skill.</p>
+            {% endif %}
+            
+            <div class="certificate-info">
+                <p><strong>Certificate Details:</strong></p>
+                <p>📋 <strong>Certificate Number:</strong> {{ certificate_number }}</p>
+                <p>📅 <strong>Completion Date:</strong> {{ completion_date|date:"F d, Y" }}</p>
+                <p>👤 <strong>Recipient:</strong> {{ recipient_name }}</p>
+            </div>
+            
+            <p>Your official certificate is attached to this email. You can download, print, or share it as needed.</p>
+            
+            <p>We hope this achievement opens new doors for you and wish you continued success in your journey!</p>
+            
+            <p style="margin-top: 30px;">
+                <strong>Best regards,</strong><br>
+                The Zenitsu Team
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Zenitsu. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply to this message.</p>
+        </div>
+    </div>
+</body>
+</html>

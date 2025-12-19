@@ -1,0 +1,277 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sign Up — Zenitsu</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --accent:#6C5CE7;
+            --accent-2:#00C2FF;
+            --muted:#6b7280;
+            --bg: #0f1724;
+        }
+        html,body{height:100%}
+        body{
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, rgba(108,92,231,0.09) 0%, rgba(0,194,255,0.03) 100%), #f8fafc;
+            margin:0;
+            color:#0b1220;
+        }
+
+        .hero {
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:4rem 1.5rem;
+        }
+
+        .feature-panel{
+            max-width:720px;
+            padding:3rem;
+            border-radius:18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+            box-shadow: 0 8px 30px rgba(12,20,40,0.08);
+        }
+
+        .left {
+            padding:2rem;
+        }
+
+        .badge-accent{
+            display:inline-flex;
+            align-items:center;
+            gap:.5rem;
+            background:linear-gradient(90deg,var(--accent),var(--accent-2));
+            color:white;
+            padding:.25rem .6rem;
+            border-radius:999px;
+            font-weight:600;
+            font-size:.85rem;
+        }
+
+        .title{
+            font-size:2rem;
+            font-weight:700;
+            margin-top:.8rem;
+            margin-bottom:.6rem;
+            line-height:1.05;
+        }
+
+        .lead{
+            color:var(--muted);
+            margin-bottom:1.4rem;
+        }
+
+        .card-signup{
+            background:linear-gradient(180deg,white, #fbfdff);
+            border-radius:14px;
+            box-shadow: 0 10px 30px rgba(11,20,40,0.06);
+            padding:1.25rem;
+            width:100%;
+        }
+
+        .social-btn{
+            border-radius:10px;
+            border:1px solid rgba(11,20,40,0.06);
+            background:white;
+            padding:.55rem .8rem;
+            font-weight:600;
+            display:inline-flex;
+            gap:.6rem;
+            align-items:center;
+            width:100%;
+        }
+
+        .or-divider{
+            display:flex;
+            align-items:center;
+            gap:.75rem;
+            margin: .8rem 0;
+        }
+        .or-divider::before, .or-divider::after{
+            content:'';
+            flex:1;
+            height:1px;
+            background:linear-gradient(90deg, transparent, rgba(11,20,40,0.06), transparent);
+        }
+
+        .form-control:focus{
+            box-shadow:none;
+            border-color:var(--accent);
+            outline:0;
+        }
+
+        .submit-btn{
+            background: linear-gradient(90deg,var(--accent),var(--accent-2));
+            color:white;
+            border:0;
+            padding:.7rem .9rem;
+            font-weight:600;
+            border-radius:10px;
+            width:100%;
+        }
+
+        .small-muted{font-size:.875rem;color:var(--muted)}
+
+        @media (min-width:992px){
+            .hero-inner{display:flex; gap:2rem; align-items:center;}
+            .left{flex:1}
+            /* increase the card column so long passwords can be fully visible */
+            .right{flex-basis:560px}
+        }
+
+        /* make sure the input uses available space and the button doesn't force wrapping */
+        .input-group { display:flex; align-items:center; gap:.25rem; }
+        .input-group .form-control { flex: 1 1 auto; min-width: 0; }
+        .input-group .btn { flex: 0 0 auto; }
+    </style>
+</head>
+<body>
+    <main class="hero">
+        <section class="feature-panel hero-inner w-100">
+            <div class="left">
+                <div class="badge-accent">New • Free Trial</div>
+                <h1 class="title">Build beautiful experiences. Start for free.</h1>
+                <p class="lead">Join Zenitsu — a minimal, lightning-fast Django starter to ship your ideas. Secure auth, clean UI, and delightful forms.</p>
+
+                <ul class="list-unstyled small-muted mb-0">
+                    <li class="d-flex align-items-start mb-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="me-2" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Email + social sign up
+                    </li>
+                    <li class="d-flex align-items-start mb-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="me-2" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Secure password hashing & CSRF protection
+                    </li>
+                    <li class="d-flex align-items-start">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="me-2" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Developer friendly — ready for production
+                    </li>
+                </ul>
+            </div>
+
+            <div class="right">
+                <div class="card-signup">
+                    <form method="post" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        <!-- Add after {% csrf_token %} -->
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+                        <div class="d-grid gap-2 mb-2">
+                            <button type="button" class="social-btn" onclick="location.href='#'">
+                                <!-- Google icon simplified -->
+                                <svg width="18" height="18" viewBox="0 0 48 48" class="" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M24 12v8h11c-.5 3-3.1 8-11 10-6 1.7-11-2.2-13-5.8l6-4.6C19 20.5 21.8 18 24 18z"/><path fill="#34A853" d="M12 24c0-1.9.4-3.6 1.1-5.2L18 23.5C17.6 25 17 26 16 27c-2 2-5.1 2.8-8 2 0 0 0-5 0-8z"/><path fill="#4A90E2" d="M24 36c3.7 0 6.8-1.1 9-2.9l-4.7-3.7C26.4 30.1 25.3 30 24 30c-3.4 0-6.3 2.3-7.3 5.5-1.6 4.5 2.2 6.5 7.3 0.5z"/><path fill="#FBBC05" d="M36.5 10.5C33 7.4 28.9 6 24 6 14 6 6.1 12.4 3.6 21.2l6.8 5.3C12.6 19.6 17.7 14 24 14c3.2 0 6.1 1 8.5 3.1l3.9-6.6z"/></svg>
+                                Continue with Google
+                            </button>
+                        </div>
+
+                        <div class="or-divider small-muted">or sign up with email</div>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="id_full_name" class="form-label small-muted">Full name</label>
+                            <input id="id_full_name" name="username" class="form-control" placeholder="Jane Doe" required value="{{ request.POST.username }}">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label small-muted">Email address</label>
+                            <input id="id_email" name="email" type="email" class="form-control" placeholder="you@company.com" required value="{{ request.POST.email }}">
+                        </div>
+
+                        <!-- Passwords -->
+                        <div class="row g-2 mb-3">
+                            <div class="col">
+                                <label for="id_password1" class="form-label small-muted">Password</label>
+                                <div class="input-group">
+                                    <input id="id_password1" name="password1" type="password" class="form-control" minlength="8" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePwd1" aria-label="Toggle password">Show</button>
+                                </div>
+                            </div>
+                        
+                            <div class="col">
+                                <label for="id_password2" class="form-label small-muted">Confirm</label>
+                                <div class="input-group">
+                                    <input id="id_password2" name="password2" type="password" class="form-control" minlength="8" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePwd2" aria-label="Toggle password">Show</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check small-muted">
+                            <input type="checkbox" class="form-check-input" id="id_terms" name="terms" required>
+                            <label class="form-check-label" for="id_terms">I agree to the <a href="#" class="text-decoration-none">Terms</a> and <a href="#" class="text-decoration-none">Privacy Policy</a></label>
+                        </div>
+
+                        <div class="d-grid mb-2">
+                            <button type="submit" class="submit-btn">Create account</button>
+                        </div>
+
+                        <p class="text-center small-muted mb-0">Already have an account? <a href="{% url 'login' %}" class="fw-semibold text-decoration-none">Sign in</a></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // password toggle (robust): try changing type directly, otherwise replace the input node
+        function replaceInputType(input, newType) {
+            if (input.type === newType) return input;
+            try {
+                input.type = newType;
+                return input;
+            } catch (e) {
+                // some environments may throw when changing type; clone and replace
+                const newInput = input.cloneNode(true);
+                newInput.type = newType;
+                // preserve current value
+                newInput.value = input.value;
+                input.parentNode.replaceChild(newInput, input);
+                return newInput;
+            }
+        }
+
+        function toggle(btnId, inputId){
+            const btn = document.getElementById(btnId);
+            let input = document.getElementById(inputId);
+            if (!btn || !input) return;
+            btn.addEventListener('click', () => {
+                const isPwd = input.type === 'password';
+                input = replaceInputType(input, isPwd ? 'text' : 'password');
+                // ensure the element keeps the expected id for other code
+                input.id = inputId;
+                btn.textContent = isPwd ? 'Hide' : 'Show';
+            });
+        }
+        toggle('togglePwd1','id_password1');
+        toggle('togglePwd2','id_password2');
+
+        // small front-end validation to prevent submit if passwords mismatch
+        (function(){
+            const form = document.querySelector('form[method="post"]');
+            if (!form) return;
+            form.addEventListener('submit', (e) => {
+                const p1 = document.getElementById('id_password1').value;
+                const p2 = document.getElementById('id_password2').value;
+                if (p1 !== p2) {
+                    e.preventDefault();
+                    alert('Passwords do not match.');
+                    document.getElementById('id_password2').focus();
+                }
+            });
+        })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
